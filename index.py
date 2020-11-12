@@ -26,6 +26,7 @@ def dates_within_range():
     for i in dates:
         if low_range <= i <= high_range:
             req_dates.append(i)
+    req_dates.reverse()
     # print(req_dates)
 
 
@@ -34,20 +35,46 @@ def put_options_data():
     # CONDITION CHECKING OF DATE AND PRINTING TRUE VALUES
     def put_options_for_req_dates(date):
         info = data_2['optionChain']['result'][0]['options'][0]['puts']
+
+        # FETCHING CURRENT PRICE FROM quote->ask
+        current_price = data_2['optionChain']['result'][0]['quote']['ask']
+        # print(current_price)
+
         counter = 0
 
         # PRINTING OPTION DATA FOR THE RESPECTIVE DATES
         for k in info:
             expiration = data_2['optionChain']['result'][0]['options'][0]['puts'][counter]['expiration']
+            strike = data_2['optionChain']['result'][0]['options'][0]['puts'][counter]['strike']
+            lower_range = current_price - (current_price*0.30)
+            upper_range = current_price + (current_price*0.10)
+
             # pprint.pprint(k)
             # print(expiration)
-            if expiration == date:
-                pprint.pprint(k)
+            if expiration == date and lower_range <= strike <= upper_range:
+                k.pop('contractSymbol', None)
+                k.pop('currency', None)
+                k.pop('lastPrice', None)
+                k.pop('change', None)
+                k.pop('contractSize', None)
+                k.pop('lastTradeDate', None)
+                k.pop('inTheMoney', None)
+                k.pop('percentChange', None)
+                k.pop('volume', None)
+                k.pop('openInterest', None)
+                k.pop('expiration', None)
+
+                # STORING VALUES IN A LIST TO PRINT CLEANER
+                z = list(k.values())
+
+                print('< Strike: ', z[0], ' | Bid: ', '%.2f' % z[1], ' | Ask: ', '%.2f' % z[2], ' | Implied Volatility: ', '%.4f' % z[3], end=' >')
+                # print(k, end=' ')
+                print()
             counter += 1
-            print("----------------------------------------------------")
 
     # PRINTING DATE FOR WHICH VALUES ARE BEING FETCHED FOR
     for x in range(len(req_dates)):
+        print("\n")
         print(datetime.datetime.fromtimestamp(req_dates[x]))
         print("___________________________________________")
         print()
@@ -64,7 +91,7 @@ def put_options_data():
 
 # ======================================================================================================================
 req_dates = []
-stocks = ['aapl', 'tsla', 'kodk', 'amzn']
+stocks = ['tsla']
 
 for stock in stocks:
     print(stock.upper())
@@ -79,11 +106,11 @@ for stock in stocks:
         data = json.loads(url.read().decode())
         # pprint.pprint(data)
 
+
     # FUNCTION TO CALCULATE EPOCH 35-50 FROM CURRENT DATE
     dates_within_range()
 
     # FETCHING PUT OPTIONS FOR REQUIRED DATES
     put_options_data()
     print()
-    print("#######################################################################################")
-    print()
+    print("$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$")
