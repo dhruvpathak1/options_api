@@ -1,7 +1,8 @@
+import pprint
 import datetime
 import json
 import math
-import pprint
+import schedule
 import time
 import urllib.request
 from win10toast import ToastNotifier
@@ -117,6 +118,13 @@ def options_api():
         toast = ToastNotifier()
         toast.show_toast("Py_Options", "Execution Completed. Check Info", duration=10, icon_path="bull.ico")
 
+
 # ======================================================================================================================
 
-options_api()
+# schedule.every().minute.do(options_api())
+#
+# # LOOP TO KEEP THE SCHEDULED TASK RUNNING
+# while True:
+#     # TO CHECK IF TASK IS PENDING OR NOT
+#     schedule.run_pending()
+#     time.sleep(1)
