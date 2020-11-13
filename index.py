@@ -3,6 +3,7 @@ import datetime
 import json
 import math
 import time
+import schedule
 import urllib.request
 from win10toast import ToastNotifier
 
@@ -91,10 +92,10 @@ def options_api():
             put_options_for_req_dates(req_dates[x])
 
     req_dates = []
-    stocks = ['aapl', 'jnj']
+    stocks = ['jnj']
 
     for stock in stocks:
-        print(stock.upper())
+        print(stock.upper(), end=' ')
 
         # ADDING STOCK NAME TO URL
         json_url = "https://query2.finance.yahoo.com/v7/finance/options/"
@@ -122,3 +123,8 @@ options_api()
 # NOTIFICATION ALERT CODE
 toast = ToastNotifier()
 toast.show_toast("Py_Options", "Execution Completed. Check Info", duration=10, icon_path="bull.ico")
+
+# schedule.every(30).seconds.do(options_api)
+# while True:
+#     schedule.run_pending()
+#     time.sleep(1)
