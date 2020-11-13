@@ -35,6 +35,7 @@ def options_api():
         # CONDITION CHECKING OF DATE AND PRINTING TRUE VALUES
         def put_options_for_req_dates(date):
             info = data_2['optionChain']['result'][0]['options'][0]['puts']
+            # pprint.pprint(info)
 
             # FETCHING CURRENT PRICE FROM quote->fiftyDayAverage
             current_price = data_2['optionChain']['result'][0]['quote']['fiftyDayAverage']
@@ -67,9 +68,9 @@ def options_api():
                     # STORING VALUES IN A LIST TO PRINT CLEANER
                     z = list(k.values())
 
-                    print('< Strike: ', z[0], ' | Bid: ', '%.2f' % z[1], ' | Ask: ', '%.2f' % z[2], end=' ')
-                    print('| Implied Volatility: ', '%.4f' % z[3], end=' >')
-                    # print(k, end=' ')
+                    # print('< Strike: ', z[0], ' | Bid: ', '%.2f' % z[1], ' | Ask: ', '%.2f' % z[2], end=' ')
+                    # print('| Implied Volatility: ', '%.4f' % z[3], end=' >')
+                    print(k, end=' ')
                     print()
                 counter += 1
 
@@ -90,7 +91,7 @@ def options_api():
             put_options_for_req_dates(req_dates[x])
 
     req_dates = []
-    stocks = ['aapl']
+    stocks = ['aapl', 'jnj']
 
     for stock in stocks:
         print(stock.upper())
@@ -111,13 +112,13 @@ def options_api():
         # FETCHING PUT OPTIONS FOR REQUIRED DATES
         put_options_data()
         print()
-        print("$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$")
-
-    # NOTIFICATION ALERT CODE
-    toast = ToastNotifier()
-    toast.show_toast("Py_Options", "Execution Completed. Check Info", duration=10, icon_path="bull.ico")
+        print("$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$")
 
 
 # ======================================================================================================================
 
 options_api()
+
+# NOTIFICATION ALERT CODE
+toast = ToastNotifier()
+toast.show_toast("Py_Options", "Execution Completed. Check Info", duration=10, icon_path="bull.ico")
