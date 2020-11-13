@@ -2,7 +2,6 @@ import pprint
 import datetime
 import json
 import math
-import schedule
 import time
 import urllib.request
 from win10toast import ToastNotifier
@@ -18,8 +17,8 @@ def options_api():
         seconds = math.trunc(time.time())
         # print("Epoch Time =", seconds)
 
-        # EPOCH TIME 35 DAYS and 50 DAYS FROM CURRENT
-        low_range = seconds + 3024000
+        # EPOCH TIME 30 DAYS and 50 DAYS FROM CURRENT
+        low_range = seconds + 2592000
         high_range = seconds + 4320000
 
         # LOOP TO FIND EPOCH TIME WITHIN RANGE
@@ -37,8 +36,8 @@ def options_api():
         def put_options_for_req_dates(date):
             info = data_2['optionChain']['result'][0]['options'][0]['puts']
 
-            # FETCHING CURRENT PRICE FROM quote->ask
-            current_price = data_2['optionChain']['result'][0]['quote']['ask']
+            # FETCHING CURRENT PRICE FROM quote->fiftyDayAverage
+            current_price = data_2['optionChain']['result'][0]['quote']['fiftyDayAverage']
             # print(current_price)
 
             counter = 0
@@ -52,7 +51,7 @@ def options_api():
 
                 # pprint.pprint(k)
                 # print(expiration)
-                if expiration == date and lower_range <= strike <= upper_range:
+                if expiration == date and (lower_range <= strike <= upper_range):
                     k.pop('contractSymbol', None)
                     k.pop('currency', None)
                     k.pop('lastPrice', None)
@@ -68,8 +67,8 @@ def options_api():
                     # STORING VALUES IN A LIST TO PRINT CLEANER
                     z = list(k.values())
 
-                    print('< Strike: ', z[0], ' | Bid: ', '%.2f' % z[1], ' | Ask: ', '%.2f' % z[2],
-                          ' | Implied Volatility: ', '%.4f' % z[3], end=' >')
+                    print('< Strike: ', z[0], ' | Bid: ', '%.2f' % z[1], ' | Ask: ', '%.2f' % z[2], end=' ')
+                    print('| Implied Volatility: ', '%.4f' % z[3], end=' >')
                     # print(k, end=' ')
                     print()
                 counter += 1
@@ -91,7 +90,7 @@ def options_api():
             put_options_for_req_dates(req_dates[x])
 
     req_dates = []
-    stocks = ['tsla']
+    stocks = ['aapl']
 
     for stock in stocks:
         print(stock.upper())
@@ -114,17 +113,11 @@ def options_api():
         print()
         print("$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$")
 
-        # NOTIFICATION ALERT CODE
-        toast = ToastNotifier()
-        toast.show_toast("Py_Options", "Execution Completed. Check Info", duration=10, icon_path="bull.ico")
+    # NOTIFICATION ALERT CODE
+    toast = ToastNotifier()
+    toast.show_toast("Py_Options", "Execution Completed. Check Info", duration=10, icon_path="bull.ico")
 
 
 # ======================================================================================================================
 
-# schedule.every().minute.do(options_api())
-#
-# # LOOP TO KEEP THE SCHEDULED TASK RUNNING
-# while True:
-#     # TO CHECK IF TASK IS PENDING OR NOT
-#     schedule.run_pending()
-#     time.sleep(1)
+options_api()
