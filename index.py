@@ -18,8 +18,8 @@ def options_api():
         seconds = math.trunc(time.time())
         # print("Epoch Time =", seconds)
 
-        # EPOCH TIME 30 DAYS and 50 DAYS FROM CURRENT
-        low_range = seconds + 2592000
+        # EPOCH TIME 35 DAYS and 50 DAYS FROM CURRENT
+        low_range = seconds + 3024000
         high_range = seconds + 4320000
 
         # LOOP TO FIND EPOCH TIME WITHIN RANGE
@@ -67,11 +67,13 @@ def options_api():
                     k.pop('expiration', None)
 
                     # STORING VALUES IN A LIST TO PRINT CLEANER
-                    z = list(k.values())
+                    keys = list(k.keys())
+                    values = list(k.values())
 
-                    # print('< Strike: ', z[0], ' | Bid: ', '%.2f' % z[1], ' | Ask: ', '%.2f' % z[2], end=' ')
-                    # print('| Implied Volatility: ', '%.4f' % z[3], end=' >')
-                    print(k, end=' ')
+                    # print(k, end=' ')
+                    for i in range (0, len(keys)):
+                        print((keys[i]).upper(), ": ", '%.2f' % values[i], end=' | ')
+
                     print()
                 counter += 1
 
@@ -92,7 +94,7 @@ def options_api():
             put_options_for_req_dates(req_dates[x])
 
     req_dates = []
-    stocks = ['jnj']
+    stocks = ['aapl']
 
     for stock in stocks:
         print(stock.upper(), end=' ')
@@ -115,16 +117,16 @@ def options_api():
         print()
         print("$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$-$")
 
+        # NOTIFICATION ALERT CODE
+        toast = ToastNotifier()
+        toast.show_toast("Py_Options", "Execution Completed. Check Info", duration=10, icon_path="bull.ico")
+
 
 # ======================================================================================================================
 
-options_api()
+# options_api()
 
-# NOTIFICATION ALERT CODE
-toast = ToastNotifier()
-toast.show_toast("Py_Options", "Execution Completed. Check Info", duration=10, icon_path="bull.ico")
-
-# schedule.every(30).seconds.do(options_api)
-# while True:
-#     schedule.run_pending()
-#     time.sleep(1)
+schedule.every().hours.do(options_api)
+while True:
+    schedule.run_pending()
+    time.sleep(1)
