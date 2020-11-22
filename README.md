@@ -14,7 +14,7 @@ Required libraries in your Python Interpreter:
     
    - [ ] math
     
-    - [ ] time
+   - [ ] time
         
    - [ ] schedule
     
