@@ -35,7 +35,7 @@ Required libraries in your Python Interpreter:
 
 4. URL data read is travesered to PUT options, with unwanted data is popped.
 
-5. PUT options Strike Prices that are within the 70% - 110% range with respect to the current price are pretty printed.
+5. PUT Options Strike Prices that are within the 70% - 110% range with respect to the current price are pretty printed.
 
 6. Printed data contains Strike Price, Bid, Ask, Expiration Date, Stock Name, Current Stock Price and the respective date whoes PUT Options are being declared.
 
