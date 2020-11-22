@@ -6,21 +6,21 @@ This individual project aims to use Yahoo Finance API and filter out the require
 ## Installation Check List
 Required libraries in your Python Interpreter:
 
-    - [ ] pprint
+   - [ ] pprint
     
-    - [ ] datetime
+   - [ ] datetime
     
-    - [ ] json
+   - [ ] json
     
-    - [ ] math
+   - [ ] math
     
     - [ ] time
         
-    - [ ] schedule
+   - [ ] schedule
     
-    - [ ] urllib.request
+   - [ ] urllib.request
     
-    - [ ] ToastNotifier from win10toast 
+   - [ ] ToastNotifier from win10toast 
 
 1. Yahoo Finance API is called and the url containing JSON data is read.
 2. Epoch Time between the range of 35-50 days from the current epoch time is stored.
