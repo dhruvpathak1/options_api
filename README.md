@@ -23,6 +23,8 @@ Required libraries in your Python Interpreter:
     
    - [ ] ToastNotifier from win10toast 
 
+## Program steps and general flow :
+
 1. Yahoo Finance API is called and the url containing JSON data is read.
 
 2. Epoch Time between the range of 35-50 days from the current epoch time is calculated.
