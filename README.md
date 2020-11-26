@@ -44,3 +44,6 @@ Required libraries in your Python Interpreter:
 8. API calls can be made for any number of stocks that will be displayed in a neat format.
 
 9. A scheduler will run the code every 1hr to update the data.
+
+## A detailed explanation of Options Trading and this project can be found at :
+#### - https://btechblogs.herokuapp.com/blog/putoptions
