@@ -1,6 +1,6 @@
 # options_api
-This individual project aims to use Yahoo Finance API and filter out the required PUT Options that fit the validation criteria.
-A scheduler is added that will exeute the code periodically after every hour.
+This individual project aims to use Yahoo Finance API and filter out the required PUT Options that fit a validation criteria.
+A scheduler is added that will execute the code periodically after every hour.
 
 ## Programming Language: Python
 
