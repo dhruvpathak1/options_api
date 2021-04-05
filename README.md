@@ -1,6 +1,6 @@
 # options_api
 This individual project aims to use Yahoo Finance API and filter out the required PUT Options that fit a validation criteria.
-A scheduler is added that will execute the code periodically after every hour.
+A scheduler is added that will execute the code periodically after every hour and sends a desktop notification.
 
 ## A detailed explanation of Options Trading and this project can be found at :
 #### - https://btechblogs.herokuapp.com/blog/putoptions
