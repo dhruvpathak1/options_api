@@ -2,6 +2,9 @@
 This individual project aims to use Yahoo Finance API and filter out the required PUT Options that fit a validation criteria.
 A scheduler is added that will execute the code periodically after every hour.
 
+## A detailed explanation of Options Trading and this project can be found at :
+#### - https://btechblogs.herokuapp.com/blog/putoptions
+
 ## Programming Language: Python
 
 ## Installation Check List
@@ -45,5 +48,3 @@ Required libraries in your Python Interpreter:
 
 9. A scheduler will run the code every 1hr to update the data.
 
-## A detailed explanation of Options Trading and this project can be found at :
-#### - https://btechblogs.herokuapp.com/blog/putoptions
